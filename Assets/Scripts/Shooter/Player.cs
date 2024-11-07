@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : DamageableCharacter
 {
@@ -15,6 +16,7 @@ public class Player : DamageableCharacter
     public float bulletspeed = 400;
     public Transform spawnPos;
     public float bulletoffset = 0.5f;
+    public Slider HealthBar;
     
 
     private float horizontalInput;
@@ -25,6 +27,7 @@ public class Player : DamageableCharacter
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        HealthBar.maxValue = maxHealth;
     }
 
     // Update is called once per frame
@@ -60,6 +63,12 @@ public class Player : DamageableCharacter
             GameObject spawnedbullet = Instantiate(bullet,spawnPos.position + spawnPos.forward*bulletoffset, spawnPos.rotation);
             spawnedbullet.GetComponent<Bullet>().Initialize(spawnPos.forward, spawnPos.position, bulletspeed, dmg);
         }
+    }
+
+    public override void OnHit(int damage)
+    {
+        base.OnHit(damage);
+        HealthBar.value = health;
     }
 
 }

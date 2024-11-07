@@ -47,7 +47,7 @@ public class Enemy : DamageableCharacter
 
         if (player)
         {
-            player.OnHit(damage);
+            player.OnHit(damage); 
             Destroy(gameObject);
         }
     }

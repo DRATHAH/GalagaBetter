@@ -64,7 +64,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
     }
 
-    public void OnHit(int damage)
+    public virtual void OnHit(int damage)
     {
         float floatDmg = (float)damage;
 
