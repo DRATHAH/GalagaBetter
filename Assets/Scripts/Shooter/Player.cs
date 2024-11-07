@@ -15,7 +15,7 @@ public class Player : DamageableCharacter
     public int dmg;
     public float bulletspeed = 400;
     public Transform spawnPos;
-    public float bulletoffset = 0.5f;
+    public float bulletoffset = 1f;
     public Slider HealthBar;
     
 
@@ -64,11 +64,11 @@ public class Player : DamageableCharacter
             spawnedbullet.GetComponent<Bullet>().Initialize(spawnPos.forward, spawnPos.position, bulletspeed, dmg);
         }
     }
-
+    
     public override void OnHit(int damage)
     {
         base.OnHit(damage);
         HealthBar.value = health;
     }
-
+    
 }
