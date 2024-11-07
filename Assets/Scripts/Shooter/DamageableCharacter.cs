@@ -28,6 +28,11 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
                     PlayerDeath();
                 }
             }
+
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
         }
         get
         {
@@ -66,10 +71,6 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
     public virtual void OnHit(int damage)
     {
-        float floatDmg = (float)damage;
-
-        damage = (int)(floatDmg + 0.5); // Make sure damage is rounded up (in case of 0.5 damage)
-
         Health -= damage;
     }
 

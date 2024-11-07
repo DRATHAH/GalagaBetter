@@ -21,7 +21,7 @@ public class CoinPickup : MonoBehaviour
         if (player != null)
         {
            GameManager.instance.score += score;
-           scoretxt.text = "score: " + GameManager.instance.score;
+           scoretxt.text = "Score: " + GameManager.instance.score;
             Destroy(gameObject);
 
         }
