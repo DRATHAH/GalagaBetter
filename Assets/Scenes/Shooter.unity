@@ -468,7 +468,7 @@ MonoBehaviour:
   dmg: 1
   bulletspeed: 400
   spawnPos: {fileID: 202145950}
-  bulletoffset: 0.5
+  bulletoffset: 1
   HealthBar: {fileID: 1767178477}
 --- !u!1 &239536731
 GameObject:
