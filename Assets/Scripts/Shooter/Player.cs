@@ -17,7 +17,14 @@ public class Player : DamageableCharacter
     public Transform spawnPos;
     public float bulletoffset = 1f;
     public Slider HealthBar;
-    
+    public GameObject shieldVisual;
+
+    // Sounds for powerups
+    public AudioSource powerupActivate;
+    public AudioSource powerupDeactivate;
+
+    // Powerup states
+    bool hasShield = false;
 
     private float horizontalInput;
     private float verticalInput;
@@ -26,6 +33,7 @@ public class Player : DamageableCharacter
     // Start is called before the first frame update
     void Start()
     {
+        shieldVisual.SetActive(false);
         characterController = GetComponent<CharacterController>();
         HealthBar.maxValue = maxHealth;
     }
@@ -67,8 +75,35 @@ public class Player : DamageableCharacter
     
     public override void OnHit(int damage)
     {
+        if (hasShield)
+        {
+            damage = 0;
+            StartCoroutine(DecayPowerup(PowerPickup.PowerupType.shield, 0));
+        }
         base.OnHit(damage);
         HealthBar.value = health;
     }
-    
+
+    public void GivePowerup(PowerPickup.PowerupType powerType, float duration)
+    {
+        powerupActivate.Play();
+        if (powerType == PowerPickup.PowerupType.shield)
+        {
+            hasShield = true;
+            shieldVisual.SetActive(true);
+        }
+
+        StartCoroutine(DecayPowerup(powerType, duration));
+    }
+
+    IEnumerator DecayPowerup(PowerPickup.PowerupType powerType, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        if (powerType == PowerPickup.PowerupType.shield && hasShield)
+        {
+            hasShield = false;
+            shieldVisual.SetActive(false);
+            powerupDeactivate.Play();
+        }
+    }
 }

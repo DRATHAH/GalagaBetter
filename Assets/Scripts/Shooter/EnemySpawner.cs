@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
             countdown = 0;
             SpawnEnemy();
         }
-        if (coolCountdown >= coolTimer)
+        if (coolCountdown >= coolTimer && coolTimer > 0)
         {
             coolCountdown = 0;
             SpawnCoolEnemy();
@@ -39,8 +39,8 @@ public class EnemySpawner : MonoBehaviour
     {
         float randPos = Random.Range(-posMod, posMod);
         Vector3 randomPosition = new Vector3(transform.position.x + randPos, transform.position.y, transform.position.z);
-        int random = Random.Range(0, enemies.Length);
-        Instantiate(enemies[0], randomPosition, transform.rotation);
+        int random = Random.Range(0, enemies.Length - 1);
+        Instantiate(enemies[random], randomPosition, transform.rotation);
     }
     void SpawnCoolEnemy()
     {
