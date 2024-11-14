@@ -22,7 +22,8 @@ public class Player : DamageableCharacter
     // Sounds for powerups
     public AudioSource powerupActivate;
     public AudioSource powerupDeactivate;
-
+    //Shooting sound
+    public AudioSource shootSound;
     // Powerup states
     bool hasShield = false;
 
@@ -68,7 +69,10 @@ public class Player : DamageableCharacter
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Create a bullet
+            
             GameObject spawnedbullet = Instantiate(bullet,spawnPos.position + spawnPos.forward*bulletoffset, spawnPos.rotation);
+            shootSound.Play();
+            
             spawnedbullet.GetComponent<Bullet>().Initialize(spawnPos.forward, spawnPos.position, bulletspeed, dmg);
         }
     }
